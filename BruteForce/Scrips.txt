@@ -1,0 +1,80 @@
+# Simulação de Ataque Brute Force com Medusa
+
+## 1. Descrição do projeto
+
+Este projeto foi desenvolvido com o objetivo de estudar e demonstrar, em um **ambiente de laboratório controlado**, o funcionamento de ataques de **Brute Force (força bruta)** utilizando a ferramenta **Medusa**, disponível no Kali Linux.
+
+O ataque de força bruta consiste na realização automatizada de diversas tentativas de autenticação, utilizando diferentes combinações de usuários e senhas, até que uma combinação válida seja encontrada.
+
+Para realizar a simulação, foram utilizadas duas wordlists: uma contendo possíveis nomes de usuários e outra contendo possíveis senhas.
+
+## 2. Wordlists utilizadas
+
+Foi criada uma lista contendo possíveis nomes de usuários:
+
+`users.txt`
+
+Também foi criada uma lista contendo possíveis senhas:
+
+`passwords.txt`
+
+Essas listas foram utilizadas exclusivamente para os testes realizados no ambiente de laboratório.
+
+## 3. Teste utilizando o protocolo FTP
+
+Para simular um ataque de Brute Force contra um serviço FTP, foi utilizada a ferramenta Medusa com o módulo `ftp`.
+
+Comando utilizado:
+
+```bash
+medusa -h 192.168.56.103 -U users.txt -P passwords.txt -M ftp -t 6
+```
+
+### Parâmetros utilizados:
+
+* `-h 192.168.56.103` — especifica o endereço IP do sistema que será testado.
+* `-U users.txt` — informa a wordlist contendo os nomes de usuários.
+* `-P passwords.txt` — informa a wordlist contendo as possíveis senhas.
+* `-M ftp` — especifica o módulo/protocolo FTP utilizado no teste.
+* `-t 6` — define a quantidade de tarefas/conexões simultâneas utilizadas durante o teste.
+
+O objetivo dessa etapa foi verificar se o serviço FTP do laboratório poderia ser afetado por tentativas automatizadas de autenticação utilizando diferentes combinações de usuário e senha.
+
+## 4. Teste contra serviço HTTP
+
+Também foi realizado um estudo utilizando o módulo HTTP da Medusa, destinado a cenários de autenticação por HTTP.
+
+Exemplo de comando utilizado:
+
+```bash
+medusa -h 192.168.56.103 -U users.txt -P passwords.txt -M http
+```
+
+Nesse caso, o endereço IP corresponde ao sistema utilizado como alvo dentro do laboratório, enquanto as opções `-U` e `-P` indicam as wordlists utilizadas durante as tentativas de autenticação.
+
+É importante destacar que aplicações web podem possuir diferentes mecanismos de autenticação. Portanto, um formulário HTTP específico pode exigir configurações adicionais para indicar corretamente o caminho, método e parâmetros utilizados pelo formulário.
+
+## 5. Resultado esperado
+
+Durante os testes, a Medusa realiza diversas tentativas de autenticação utilizando as combinações presentes nas wordlists.
+
+Quando uma combinação válida é identificada, a ferramenta pode indicar o resultado no terminal, permitindo analisar o comportamento do serviço diante das tentativas automatizadas.
+
+## 6. Conclusão
+
+O projeto permitiu compreender, de forma prática, o conceito de **ataque de força bruta**, além de proporcionar contato com a ferramenta **Medusa** e com diferentes mecanismos de autenticação.
+
+A atividade também demonstra a importância da utilização de medidas de segurança, como:
+
+* utilização de senhas fortes;
+* limitação de tentativas de login;
+* bloqueio temporário de contas;
+* monitoramento de tentativas de autenticação;
+* utilização de mecanismos de detecção de ataques;
+* implementação de autenticação multifator (MFA), quando disponível.
+
+## ⚠️ Aviso
+
+Este projeto foi desenvolvido **exclusivamente para fins educacionais**, utilizando um ambiente de laboratório controlado.
+
+Os testes devem ser realizados somente em sistemas próprios ou em ambientes para os quais exista **autorização explícita**. Não devem ser realizados testes de força bruta contra sistemas, serviços ou contas de terceiros sem autorização.

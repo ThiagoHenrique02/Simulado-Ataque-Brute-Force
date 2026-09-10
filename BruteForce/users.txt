@@ -1,0 +1,11 @@
+admin
+administrator
+user
+usuario
+guest
+msfadmin
+test
+teste
+root
+student
+estagiario
